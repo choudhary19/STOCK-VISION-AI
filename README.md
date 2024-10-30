@@ -1,5 +1,5 @@
 
-# Trading Bot with React and Django AI Backend
+# StockVision Ai with React and Django AI Backend
 
 A web-based Trading Bot application that uses a React frontend and a Django backend integrated with a Machine Learning model for stock price prediction.
 
