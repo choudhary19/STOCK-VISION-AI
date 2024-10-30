@@ -23,6 +23,6 @@ This project is a trading bot web app that predicts stock prices based on histor
 - **Frontend**: React, Axios
 - **Backend**: Django, Django REST Framework
 - **AI Model**: TensorFlow/Keras
-- **Deployment**: Docker (optional), CORS, Nginx
+- **Deployment**: AWS , CORS, Nginx
 
 ---
