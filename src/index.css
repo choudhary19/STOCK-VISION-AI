@@ -1,68 +1,31 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.cl-avatarBox {
+    width: 2.75rem;
+    height: 2.75rem;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* SignInButton Styles */
+.cl-signInButton {
+    font-size: 0.875rem; /* Smaller Text */
+    padding: 10px; /* Smaller Padding */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Keep Text in One Line */
+    white-space: nowrap; /* No Line Breaks */
+    background-color: rgb(63, 230, 63); /*     color: #121212; /* Dark Text */
+    border-radius: 0.5rem; /* Rounded Corners */
+    border: 2px solid transparent; /* Border for Hover Effect */
+    cursor: pointer; /* Pointer Cursor */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth Transitions */
   }
-  a:hover {
-    color: #747bff;
+  
+  .cl-signInButton:hover {
+    background-color: rgb(29, 205, 29); /* Slightly Darker Yellow on Hover */
+    border-color: rgb(27, 80, 27); /* Yellow Border */
   }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+  
+
+
