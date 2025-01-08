@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignUpPage from './Sign-Up';
+import SignInPage from './Sign-In';
+import './index.css';
+import HomePage from './home_page';
+import TradePage from './Trade';
+import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
+
+const ProtectedRoute = ({ children }) => {
+  const { isSignedIn } = useAuth();
+
+  if (!isSignedIn) {
+    return <SignInPage />;
+  }
+
+  return children;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+
+        
+        {/* Protected Routes */}
+        <Route
+          path="/trade"
+          element={
+            <ProtectedRoute>
+              <TradePage redirectUrl='/trade'/>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Sign-Up Page */}
+        <Route
+          path="/signup"
+          element={
+            <SignedOut>
+              <SignUpPage redirectUrl="/" />
+            </SignedOut>
+          }
+        />
+
+        {/* Sign-In Page */}
+        <Route
+          path="/signin"
+          element={
+            <SignedOut>
+              <SignInPage redirectUrl="/" />
+            </SignedOut>
+          }
+        />
+
+        {/* Default Fallback */}
+        <Route
+          path="*"
+          element={
+            <SignedOut>
+              <RedirectToSignIn />
+            </SignedOut>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
