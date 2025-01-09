@@ -5,7 +5,7 @@ const Banner = () => {
   // Typewriter effect
   const [text] = useTypewriter({
     words: ['StockVision', 'Ai Prediction', 'Automation'],
-    loop: true, // Set loop to true for continuous animation
+    loop: true, 
   });
 
   return (
