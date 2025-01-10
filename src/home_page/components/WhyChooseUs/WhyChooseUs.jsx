@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
         <Swiper
           modules={[Navigation, Pagination]} // Add modules here
           spaceBetween={20}
-          slidesPerView={2  } // Change to 1 for mobile view
+          slidesPerView={3} // Change to 1 for mobile view
           // Set the number of slides to display at different breakpoints
           // This is an object where the keys are the breakpoints (in pixels)
           // and the values are objects with a `slidesPerView` property
