@@ -11,7 +11,6 @@ const OrderHeader = () => {
         <a href="#"  className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Order History</a>
     </li>
   
-    
 </ul>
 
   )

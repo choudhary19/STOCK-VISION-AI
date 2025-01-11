@@ -116,8 +116,8 @@ export default OrderForm;
 // For example:
 // If the current market price of AAPL is $115, but you're only willing to buy it if it drops to $112, you set the price to $112.
 // Similarly, if you own AAPL stock and want to sell it when the price goes up to $150, you set the price to $150.
-// Key Concept:
-// Price is your desired per-stock value for the transaction.
+
+
 // 2. Amount
 // What is it?
 // The Amount is the total money (in USDT) that you want to spend on buying or selling stocks.

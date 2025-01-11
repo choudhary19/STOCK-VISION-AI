@@ -6,7 +6,8 @@ const StockNews = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchStockNews = async () => {
-    const apiKey = 'd209e2fdffef4b3a86aa8d934a0ad62a';
+    const newsapi = import.meta.env.VITE_NEWS_API_KEY
+    const apiKey = newsapi;
     const url = `https://newsapi.org/v2/everything?q=stocks&apiKey=${apiKey}`;
 
     try {

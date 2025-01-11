@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from 'react-reveal/Fade';
 
 const team_members = [
   {
@@ -29,6 +30,7 @@ const Team = () => {
           </h1>
         </div>
         
+       <Fade top duration={3000}> 
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-center -mx-4">
           {
@@ -54,6 +56,7 @@ const Team = () => {
           }
         </div>
       </div>
+      </Fade>
     </section>
   );
 };

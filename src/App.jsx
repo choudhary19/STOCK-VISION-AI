@@ -5,6 +5,8 @@ import SignInPage from './Sign-In';
 import './index.css';
 import HomePage from './home_page';
 import TradePage from './Trade';
+import PricePage from './pricing';
+import MarketPage from './Market/Index';
 import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
 
 const ProtectedRoute = ({ children }) => {
@@ -23,6 +25,7 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
+        <Route path='/markets' element={<MarketPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
 
@@ -32,9 +35,19 @@ function App() {
           path="/trade"
           element={
             <ProtectedRoute>
-              <TradePage redirectUrl='/trade'/>
+              <TradePage />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+         path='/pricing'
+         element={
+           <ProtectedRoute>
+            <PricePage />
+           </ProtectedRoute>
+         }
+        
         />
 
         {/* Sign-Up Page */}

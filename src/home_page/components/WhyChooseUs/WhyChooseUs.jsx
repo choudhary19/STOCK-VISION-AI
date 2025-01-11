@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
         <Swiper
           modules={[Navigation, Pagination]} // Add modules here
           spaceBetween={20}
-          slidesPerView={3} // Change to 1 for mobile view
+          slidesPerView={1} // Change to 1 for mobile view
           // Set the number of slides to display at different breakpoints
           // This is an object where the keys are the breakpoints (in pixels)
           // and the values are objects with a `slidesPerView` property
@@ -48,15 +48,19 @@ const WhyChooseUs = () => {
             540: {
               slidesPerView: 2,
             },
-
+            720: {
+              slidesPerView: 3,
+            },
           }}
           navigation
           pagination={{ clickable: true }}
-          className="flex justify-center"
+          className="flex justify-center border border-neutral-950"
         >
           {sliderItems.map((item, index) => (
-            <SwiperSlide key={index} className="py-10 flex justify-center">
-              <WhyChooseUsItem item={item} />
+            <SwiperSlide key={index} className="py-10 w-fit bg-gradient-to-r from-slate-800 via-blue-900 to-slate-700 flex justify-center">
+              <div className="flex-1">
+                <WhyChooseUsItem item={item} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
