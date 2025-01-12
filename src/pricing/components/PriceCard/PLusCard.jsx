@@ -6,18 +6,18 @@ const Pluscard = () => {
       className="w-full max-w-sm p-3  border rounded-lg shadow sm:p-8  "
       style={{ backgroundColor: "#131C40" }}
     >
-      <h5 className="mb-4 text-5xl font-extrabold tracking-tighter text-gray-500 dark:text-white">
+      <h5 className="mb-4 text-5xl font-extrabold tracking-tighter text-white">
         Plus
       </h5>
-      <span className="text-gray-500 dark:text-gray-400">
+      <span className="text-white">
         Great for investors who need advanced functionality to manage their
         portfolios and research stocks{" "}
       </span>
 
-      <div className="flex mt-4 items-baseline text-gray-900 dark:text-white">
+      <div className="flex mt-4 items-baseline text-green-500">
         <span className="text-3xl font-semibold">$</span>
         <span className="text-5xl font-extrabold tracking-tight">39</span>
-        <span className="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">
+        <span className="ms-1 text-xl font-normal text-white">
           /month
         </span>
       </div>
@@ -32,7 +32,7 @@ const Pluscard = () => {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
           </svg>
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+          <span className="text-base font-normal leading-tight text-gray-300 dark:text-gray-400 ms-3">
             Trade Automation
           </span>
         </li>
@@ -46,7 +46,7 @@ const Pluscard = () => {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
           </svg>
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+          <span className="text-base font-normal leading-tight text-gray-300 dark:text-gray-400 ms-3">
             Effortless Execution
           </span>
         </li>
@@ -60,7 +60,7 @@ const Pluscard = () => {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
           </svg>
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+          <span className="text-base font-normal leading-tight text-gray-300 dark:text-gray-400 ms-3">
             Security and Reliability{" "}
           </span>
         </li>
@@ -74,7 +74,7 @@ const Pluscard = () => {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
           </svg>
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+          <span className="text-base font-normal leading-tight text-gray-300 dark:text-gray-400 ms-3">
             Customer Support
           </span>
         </li>

@@ -1,54 +1,36 @@
-import React from "react";
+import React from 'react'
+import chartviedo from '../../assets/videos/Chart.mp4'
+import '../../index.css'
 
-const WhoWeAre = ({ 
-  heading, 
-  subHeading, 
-  title, 
-  content, 
-  image 
-}) => (
-  <section 
-    id="about" 
-    className=" lg:py-32 bg-gray-100 relative" 
-    style={{ 
-      backgroundImage: "url('public/img/Banner/banner_bg.jpg')", 
-      backgroundSize: "cover", 
-      backgroundPosition: "center" 
-    }}
-  >
-     <div className="absolute text-center py-5 top-0 left-0 w-full justify-center">
-          <h1 className="text-3xl lg:text-4xl font-extrabold text-white">
-            {heading}
-          </h1>
-        </div>
-
-    <div className="container mx-auto px-6">
-      <div className="flex pl-10 flex-col lg:flex-row items-center justify-between">
-        <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:mr-12">
-          <div className="text-center lg:text-left mb-6">
-            <span className="text-lg font-semibold text-yellow-200 uppercase">
-              {subHeading}
-            </span>
-            <h2 
-              className="text-3xl lg:text-4xl font-bold text-white" 
-              dangerouslySetInnerHTML={{ __html: title }} 
-            />
-          </div>
-          <p className="text-gray-300 text-lg">{content}</p>
-        </div>
-
-        <div className="w-full lg:w-1/2">
-          <div className="about-img text-center lg:text-right" data-wow-delay=".2s">
-            <img 
-              src={image} 
-              alt="" 
-              className="w-4/5 h-auto rounded-lg shadow-lg" 
-            />
-          </div>
+const WhoWeAre = () => {
+  return (
+    <div className="relative pt-10 pb-52 text-center justify-center bg-black"
+    // style={{
+    //   backgroundImage: " url('public/img/Banner/banner_bg02.jpg')",
+    //   backgroundSize: 'cover',
+    //   backgroundPosition: 'center',
+    // }}
+    >
+      <h1 className='text-6xl lg:text-8xl font-bold  p-5  text-white'>Where the World <br/> <span className='bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>does markets</span> </h1>
+      <p className='text-xl lg:text-3xl  font-semibold text-white p-10 mt-5'>
+        Look first / Then leap. It's what you'd call our philosophy,<br/> that it doesn't matter who you are or what you trade,<br/> preparing then committing is the best way of maximizing life's returns.
+      </p>
+      <button className='mt-10 px-20 py-4 text-white bg-transparent font-semibold hover:bg-gray-500 hover:text-white border border-gray-500 rounded-full transition-colors duration-300'>Get Started</button>
+      <h1 className='text-6xl lg:text-8xl font-bold  p-5  text-white'>Hello<span style={{fontFamily: 'Pacifico, cursive'}}>,</span><span ><span className='bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Traders</span></span> </h1>
+      <p className='text-xl lg:text-2xl  font-semibold text-white p-10 mt-5'>
+       StockVision is a comprehensive trading bot that automates stock market analysis and trades. <br/>It leverages advanced algorithms to monitor market trends and execute trades <br/> efficiently for optimal results
+      aslo add we aslo provide <br/> charting platform and social network used by<br/>  traders and investors worldwide to spot <br/>opportunities across global markets.
+      </p>
+      <div className='relative mt-10 flex justify-center'>
+        <div className='relative  overflow-hidden  rounded-3xl border-4 border-purple-500' style={{height:500 , width:800}}>
+          <video className='w-full h-[300px] lg:h-[500px]' autoPlay  loop>
+            <source src={chartviedo} type="video/mp4" />
+          </video>
         </div>
       </div>
-    </div>
-  </section>
-);
 
-export default WhoWeAre;
+    </div>
+  )
+}
+
+export default WhoWeAre

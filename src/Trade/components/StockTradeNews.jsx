@@ -25,7 +25,7 @@ const StockNews = () => {
   }, []);
 
   return (
-    <div className="bg-gray-200 w-fit ml-3 mt-5 dark:bg-gray-800 p-4 rounded-lg text-white">
+    <div className="bg-gray-800 w-fit ml-3 mt-5 p-4 rounded-lg text-white">
       <h2 className="text-lg font-semibold mb-4">Stock News</h2>
       {loading ? (
         <div className="text-center text-gray-500">Loading News...</div>

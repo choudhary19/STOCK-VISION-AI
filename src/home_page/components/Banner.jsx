@@ -10,12 +10,13 @@ const Banner = () => {
 
   return (
     <section
-      className="relative pt-10 pb-96"
+      className="relative pt-10 pb-96 bg-black"
       style={{
-        backgroundImage: "url('public/img/About/about-us-chart.png'), url('public/img/Banner/banner_bg.jpg')",
+        backgroundImage: "url('public/img/About/about-us-chart.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
+      
     >
       <div className="container mx-auto px-4 relative">
         {/* First Image */}
@@ -26,30 +27,30 @@ const Banner = () => {
           style={{ width: '200px' }}
         />
 
-        {/* Second Image */}
+        {/* third Image */}
         <img
           src="public/img/Banner/banner_shape02.png"
           alt="Banner Shape 02"
-          className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2"
+          className="absolute bottom-5 right-0 transform translate-x-1/2 translate-y-1/2"
           style={{ width: '200px' }}
         />
 
-        {/* Third Image */}
+        {/* Secnond Image */}
         <img
           src="public/img/Banner/banner_shape03.png"
           alt="Banner Shape 03"
-          className="absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2"
+          className="absolute top-20 right-1/2 transform translate-x-1/2 -translate-y-1/2"
           style={{ width: '200px' }}
         />
 
         <div className="flex justify-center">
-          <div className="lg:col-span-10">
+          <div className="lg:col-span-10 mt-14">
             <div className="text-center mx-5 relative z-10">
-              <h1 className="text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+              <h1 className="text-4xl font-bold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">
                 Join Future Of Algorithmic{' '}
-                <span className="text-blue-600 dark:text-blue-500">Stocks</span>
+                <span className="text-blue-600 ">Stocks</span>
                 <br />
-                With <span className="text-blue-900 dark:text-green-500">{text}</span>
+                With <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">{text}</span>
                 <Cursor />
               </h1>
             </div>

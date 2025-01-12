@@ -6,6 +6,7 @@ import WhoWeAre from './components/WhoWeAre'
 import WhyChooseUs from './components/WhyChooseUs/WhyChooseUs'
 import Team from './components/Team/Team'
 import CommentSection from './components/CommentSection'
+import WhyChooseUs2 from './components/WhyChooseUs/WhyChooseUs2'
 
 const HomePage = () => {
   return (
@@ -17,22 +18,23 @@ const HomePage = () => {
          <Banner/>
 
          <WhoWeAre
-         heading='Trading Platiform'
-         subHeading='. Who We are .'
-         title="Build By <span>Traders</span>, For <span>Traders</span>."
-         content={""}
-         image={"public/img/About/who-we-are-chart.png"}
+        //  heading='Trading Platiform'
+        //  subHeading='. Who We are .'
+        //  title="Build By <span>Traders</span>, For <span>Traders</span>."
+        //  content={""}
+        //  image={"public/img/About/who-we-are-chart.png"}
          />
 
          <WhyChooseUs/>
+         <WhyChooseUs2/>
 
-        <WhoWeAre
+        {/* <WhoWeAre
          heading=''
          subHeading=''
          title="<span>StockVision</span> Ai"
          content={"StockVision Ai use the Deep learning based Algorithms to take decision and predict NSDAQ stock market’s prices and help you to grow up your funds with absolute precision.  "}
          image={"public/img/About/robot.png"} 
-         />
+         /> */}
 
          <Team/>
 

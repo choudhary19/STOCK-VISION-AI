@@ -31,13 +31,13 @@ const Header = () => {
         <div className="flex justify-center">
           <div className="lg:col-span-10">
             <div className="text-center mx-5 relative z-10">
-              <h1 className="text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                <br />We Keep Trading<br />
+              <h1 className="text-4xl font-bold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">
+                We Keep <span className='bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Trading</span> <br />
               </h1>
-              <h1 className="text-2xl p-6 font-bold leading-none tracking-tight text-gray-900 dark:text-white">
+              <h1 className="text-2xl p-6 font-bold leading-none tracking-tight text-white">
                 Unbeatable Prices! Get the Industry's Leading Trading Tool at a Price that Fits Your Wallet
               </h1>
-              <h1 className="text-2xl my-10 p-6 font-bold leading-none tracking-tight text-gray-900 dark:text-white">
+              <h1 className="text-2xl my-10 p-6 font-bold leading-none tracking-tight text-white">
                 <br />Select the Plan that Fits Your Trading Goals
               </h1>
             </div>

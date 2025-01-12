@@ -39,8 +39,8 @@ const MarketActivities = () => {
   }, []);
 
   return (
-    <div className='bg-gray-200 w-fit ml-3 mt-5 dark:bg-gray-800 p-4 rounded-lg text-white'>
-      <h2 className="text-lg font-semibold mb-4">Market Activities</h2>
+    <div className='bg-gray-800 w-fit ml-3 mt-5  p-4 rounded-lg text-black'>
+      <h2 className="text-lg font-semibold mb-4 text-white">Market Activities</h2>
       {
       loading ? (
         <div className="text-center text-gray-500">Loading...</div>
@@ -49,9 +49,7 @@ const MarketActivities = () => {
           {marketActivities.map((activity, index) => (
             <div
               key={index}
-              className={`flex items-center justify-between px-4 py-2 rounded-md ${
-                index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white dark:bg-gray-900'
-              }`}
+              className={`flex items-center justify-between px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-800`}
             >
               <div className="flex items-center">
                 <span className="mr-2 font-semibold">{activity.symbol}</span>

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const StockPriceHeader = () => {
   const [stocks, setStocks] = useState([]);
@@ -13,6 +20,8 @@ const StockPriceHeader = () => {
     { symbol: "AMZN", name: "Amazon" },
     { symbol: "MSFT", name: "Microsoft" },
     { symbol: "META", name: "Meta" },
+    { symbol: "NVDA", name: "Nvidia" },
+
   ];
 
   const fetchStockData = async () => {
@@ -21,26 +30,16 @@ const StockPriceHeader = () => {
         axios.get(
           `https://finnhub.io/api/v1/quote?symbol=${company.symbol}&token=cu0fm31r01ql96gqgt50cu0fm31r01ql96gqgt5g`
         )
-        
       );
       const responses = await Promise.all(requests);
-
-      const data = responses.map((response, index) => ({
-        name: companies[index].name,
-        symbol: companies[index].symbol,
-        price: response.data.c,
-        high: response.data.h,
-        low: response.data.l,
-        change: response.data.d,
-        changePercent: response.data.dp,
-        open_price: response.data.o,
+      const stockData = responses.map((response, index) => ({
+        ...companies[index],
+        ...response.data,
       }));
-
-      setStocks(data);
+      setStocks(stockData);
       setLoading(false);
-    } catch (err) {
-      console.error("Error fetching stock data:", err);
-      setError("Failed to fetch stock data");
+    } catch (error) {
+      setError(error);
       setLoading(false);
     }
   };
@@ -49,32 +48,27 @@ const StockPriceHeader = () => {
     fetchStockData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error loading stock data: {error}</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <Swiper
-      spaceBetween={30}
-      slidesPerView={3}
-      pagination={{ clickable: true }}
-      className="w-50 h-full mt-10 "
-    >
-      {
-      stocks.map((stock) => (
-        <SwiperSlide key={stock.symbol}>
-          <div className="rounded-md shadow-md p-4 text-white bg-gray-800 min-w-60 ml-2">
-            <h1 className="text-xl font-bold mb-4">
-              {stock.name} ({stock.symbol})
-            </h1>
-            <div className="mb-4">
-              <div className="text-lg">Current Price: ${stock.price}</div>
-              <div className="text-sm text-green-500">High: ${stock.high}</div>
-              <div className="text-sm text-red-500">Low: ${stock.low}</div>
+    <div className="stock-price-header">
+      <Carousel className="w-full max-w-4xl  mt-10 h-[350px]">
+        <CarouselContent className="ml-3 max-h-full">
+          {stocks.map((stock) => (
+            <CarouselItem key={stock.symbol} className="pl-1 md:basis-1/2 lg:basis-1/3">
+              <div className="p-2">
+                <Card className="h-full w-fit bg-gray-800 text-white">
+                  <CardHeader>
+                    <CardTitle className="text-center text-lg font-bold">
+                      {stock.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center justify-center p-5 h-full">
+                  <div className="mb-4">
+              <div className="text-lg">Current Price: ${stock.c}</div>
+              <div className="text-sm text-green-500">High: ${stock.h}</div>
+              <div className="text-sm text-red-500">Low: ${stock.l}</div>
             </div>
             <div className="flex flex-wrap gap-4">
               <div className="tickerItem p-2 rounded-md bg-gray-700">
@@ -84,17 +78,17 @@ const StockPriceHeader = () => {
                 <div className="tickerPriceText text-sm">
                   <span
                     className={`${
-                      stock.change > 0 ? "text-green-500" : "text-red-500"
+                      stock.d > 0 ? "text-green-500" : "text-red-500"
                     }`}
                   >
-                    ${stock.change}
+                    ${stock.d}
                   </span>
                   <span
                     className={`${
-                      stock.changePercent > 0 ? "text-green-500" : "text-red-500"
+                      stock.dp > 0 ? "text-green-500" : "text-red-500"
                     }`}
                   >
-                    ({stock.changePercent}%)
+                    ({stock.dp}%)
                   </span>
                 </div>
               </div>
@@ -103,15 +97,30 @@ const StockPriceHeader = () => {
                   Open Price
                 </div>
                 <div className="tickerPriceText text-white text-sm">
-                  {stock.open_price}
+                  {stock.o}
                 </div>
               </div>
             </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="w-12 h-12 text-white bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center" />
+        <CarouselNext className="w-12 h-12 text-white bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center" />
+      </Carousel>
+    </div>
   );
 };
 
 export default StockPriceHeader;
+
+
+// symbol: companies[index].symbol,
+// price: response.data.c,
+// high: response.data.h,
+// low: response.data.l,
+// change: response.data.d,
+// changePercent: response.data.dp,
+// open_price: response.data.o,
