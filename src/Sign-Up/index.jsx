@@ -27,6 +27,8 @@ const SignUpPage = () => {
           <h3 className="my-5">Your Trading adventure starts here!!!!</h3>
         </div>
       </div>
+
+      
       <div className='flex items-center justify-center w-[300px] p-50 mt-10 mb-20' >
         <SignUp
           signInUrl='/signin'
