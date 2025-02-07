@@ -17,21 +17,22 @@ const team_members = [
 const Team = () => {
   return (
     <section
-      className="bg-gray-100 py-16"
-      style={{
-        backgroundImage: "url('public/img/Banner/banner_bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className=" py-16 bg-black justify-center text-center"
+      // style={{
+      //   backgroundImage: "url('public/img/Banner/banner_bg.jpg')",
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
-         <div className="text-center py-10">
-          <h1 className="text-3xl lg:text-4xl font-extrabold text-white uppercase">
-            Our Teams
-          </h1>
-        </div>
+         <h1 className="text-6xl lg:text-7xl font-bold text-white p-5 mt-5">
+         Our{" "}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+          Team Members
+        </span>
+      </h1>
         
        <Fade top duration={3000}> 
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-5">
         <div className="flex flex-wrap justify-center -mx-4">
           {
           team_members.map((member, index) => (

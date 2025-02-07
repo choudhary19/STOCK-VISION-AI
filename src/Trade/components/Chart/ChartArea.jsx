@@ -164,9 +164,14 @@ const StockChart = () => {
             <Chart options={options} series={series} type="line" height="350" />
           )}
         </div>
-      ) : (
-        <TradingViewChartArea /> // Display TradingView component
-      )}
+      ) :(
+        <h1 className='text-2xl font-semibold mb-4 text-center justify-center'>TradingView</h1>
+      )
+      // : 
+      // (
+      //   <TradingViewChartArea /> // Display TradingView component
+      // )
+      }
     </>
   );
 };

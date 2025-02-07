@@ -1,22 +1,9 @@
-import React, { useState } from "react";
 
 const OrderForm = ({ buttonType }) => {
 
-  const [range, setRange] = useState("1000");
-  const [formData, setFormData] = useState({ price: "", amount: "" });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log("Submitted Form Data:", formData);
-  };
 
   return (
-    <form className="w-full px-10 py-10 mx-auto" onSubmit={formSubmitHandler}>
+    <form className="w-full px-10 py-10 mx-auto" >
       <div className="mb-5">
         <label htmlFor="price" className="block mb-2 text-sm font-bold text-white">
           Price
@@ -26,8 +13,8 @@ const OrderForm = ({ buttonType }) => {
           id="price"
           name="price"
 
-          value={formData.price}
-          onChange={handleChange}
+          value={""}
+          onChange={""}
           className="block w-full p-2.5 text-black font-bold border rounded-lg"
           placeholder="Price"
         />
@@ -41,8 +28,8 @@ const OrderForm = ({ buttonType }) => {
           type="text"
           id="amount"
           name="amount"
-          value={formData.amount}
-          onChange={handleChange}
+          value={""}
+          onChange={""}
           className="block w-full p-2.5  font-bold text-black border rounded-lg"
           placeholder="USDT"
         />
@@ -56,8 +43,8 @@ const OrderForm = ({ buttonType }) => {
         <input
           id="labels-range-input"
           type="range"
-          value={range}
-          onChange={(e) => setRange(e.target.value)}
+          value={""}
+          onChange={""}
           min="100"
           max="1500"
           className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"

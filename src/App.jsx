@@ -7,6 +7,9 @@ import HomePage from './home_page';
 import TradePage from './Trade';
 import PricePage from './pricing';
 import MarketPage from './Market/Index';
+import Prediction from './prediction';
+import OrderPage from './Orders';
+
 import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
 
 const ProtectedRoute = ({ children }) => {
@@ -39,12 +42,31 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+         path='/orders'
+         element={
+           <ProtectedRoute>
+            <OrderPage />
+           </ProtectedRoute>
+         }
+        
+        />
 
         <Route
          path='/pricing'
          element={
            <ProtectedRoute>
             <PricePage />
+           </ProtectedRoute>
+         }
+        
+        />
+        
+         <Route
+         path='/predictions'
+         element={
+           <ProtectedRoute>
+            <Prediction />
            </ProtectedRoute>
          }
         

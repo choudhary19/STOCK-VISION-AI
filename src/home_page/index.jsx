@@ -7,6 +7,9 @@ import WhyChooseUs from './components/WhyChooseUs/WhyChooseUs'
 import Team from './components/Team/Team'
 import CommentSection from './components/CommentSection'
 import WhyChooseUs2 from './components/WhyChooseUs/WhyChooseUs2'
+import ContentComponent from './components/Content'
+import HowItWorks from './Howitwork'
+import Faq from './components/FAQ'
 
 const HomePage = () => {
   return (
@@ -14,7 +17,7 @@ const HomePage = () => {
      <div className="absolute left-0 bottom-0 w-full h-full bg-gradient-to-t from-opacity-0 via-opacity-0 to-opacity-100" style={{ backgroundImage: 'url(public/img/Banner/banner_bg02.jpg)' }}></div>
         <div className='relative z-10 padding-top-120'>
          <NavBar /> 
-
+        
          <Banner/>
 
          <WhoWeAre
@@ -35,7 +38,9 @@ const HomePage = () => {
          content={"StockVision Ai use the Deep learning based Algorithms to take decision and predict NSDAQ stock market’s prices and help you to grow up your funds with absolute precision.  "}
          image={"public/img/About/robot.png"} 
          /> */}
-
+        <ContentComponent></ContentComponent>
+        <HowItWorks></HowItWorks>
+        <Faq></Faq>
          <Team/>
 
          <CommentSection/>
