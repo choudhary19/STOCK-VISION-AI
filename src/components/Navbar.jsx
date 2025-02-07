@@ -31,6 +31,7 @@ const NavBar = () => {
                 { path: "/markets", label: "Markets" },
                 { path: "/about-us", label: "About Us" },
                 { path: "/predictions", label: "Predictions" },
+                { path: "/autotrade", label: "Auto Trade" },
               ].map((item) => (
                 <li key={item.path}>
                   <NavLink
