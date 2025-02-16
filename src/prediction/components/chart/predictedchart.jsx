@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const PredictedChart = ({ symbol, data, prediction }) => {
-  const [isMounted, setIsMounted] = useState(false);
 
   return (
     <div className="w-full h-80 rounded-lg shadow p-4">
@@ -25,8 +24,8 @@ const PredictedChart = ({ symbol, data, prediction }) => {
           </svg>
         </div>
       </div>
-      {!isMounted && <div className="bg-slate-500 animate-pulse h-80 w-full"></div>}
-      <div id="area-chart"></div>
+       <div className="bg-slate-500 animate-pulse h-80 w-full"></div>
+      
     </div>
   );
 };

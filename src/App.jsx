@@ -9,6 +9,7 @@ import PricePage from './pricing';
 import MarketPage from './Market/Index';
 import Prediction from './prediction';
 import OrderPage from './Orders';
+import Aboutus from './About-us';
 
 import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
 
@@ -70,6 +71,13 @@ function App() {
            </ProtectedRoute>
          }
         
+        />
+        <Route
+        path='/about-us'
+        element={
+            <Aboutus>
+            </Aboutus>
+        }
         />
 
         {/* Sign-Up Page */}

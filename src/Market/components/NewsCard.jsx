@@ -5,7 +5,7 @@ const NewsCard = ({ title, description, url, urlToImage, source }) => {
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
       <img
         className="w-full h-48 object-cover"
-        src={urlToImage || 'https://via.placeholder.com/150'}
+        src={urlToImage}
         alt={title}
       />
       <div className="px-6 py-4">
