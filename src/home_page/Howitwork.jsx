@@ -15,49 +15,26 @@ export const Steps = [
     description: "Once done, you'll be able to start earning money right away.",
   },
 ];
-
 const Step = ({ step, number }) => {
-  const size = number === 1 ? "400px" : number === 2 ? "350px" : "280px";
-
   return (
     <div
-      className={`rounded-full flex items-center justify-center flex-col gap-5 p-5 w-[${size}] h-[${size}] relative overflow-hidden ${
+      className={`rounded-full flex items-center justify-center flex-col gap-5 p-5 w-[350px] h-[350px] relative overflow-hidden ${
         number !== 2
           ? "bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 shadow-lg"
-          : "bg-transparent border-2 border-[#7752FE] hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:text-white"
+          : "bg-transparent border-2 border-[#7752FE] "
       }`}
     >
-      {number === 2 && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-          className="absolute bottom-0 left-0 w-full animate-bounce"
-        >
-          <path
-            fill="#7752FE"
-            fillOpacity="0.5"
-            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,96C672,64,768,32,864,53.3C960,75,1056,149,1152,186.7C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          ></path>
-        </svg>
-      )}
-      <div
-        className={`flex items-center justify-center flex-col gap-1 transition-colors ${
-          number === 2 ? "text-[#f9f9fb] hover:text-white" : "text-white"
-        }`}
-      >
-        <p className="text-[15px] font-medium uppercase">{`Step 0${number}`}</p>
-        <h2 className="font-semibold text-[22px]">{step.title}</h2>
-        <p className="font-normal text-[14px] text-white leading-relaxed text-center">
-          {step.description}
-        </p>
-      </div>
+      <h2 className="font-semibold text-[22px]">{step.title}</h2>
+      <p className="font-normal text-[14px] text-white leading-relaxed text-center">
+        {step.description}
+      </p>
     </div>
   );
 };
 
 const HowItWorks = () => {
   return (
-    <div className="h-[100%] w-full bg-black relative flex items-start justify-start  overflow-y-auto md:py-0 py-12">
+    <section className="h-[100%] w-full bg-black ">
         <BubbleAnimation></BubbleAnimation>
       <div className="flex items-center justify-center flex-col gap-10 md:gap-20 text-[#f8f2f2] w-full m-auto max-w-7xl">
         <div className="flex flex-col text-center items-center justify-between gap-3 w-full flex-wrap">
@@ -90,9 +67,8 @@ const HowItWorks = () => {
           </div>
         </div>
       </div>
-      <BubbleAnimation></BubbleAnimation>
 
-    </div>
+    </section>
   );
 };
 

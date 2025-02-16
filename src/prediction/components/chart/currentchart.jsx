@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const CurrentChart = ({ symbol, data, prediction }) => {
-  const [isMounted, setIsMounted] = useState(false);
 
   return (
     <div className="w-full h-80 rounded-lg shadow p-4">
@@ -25,8 +24,9 @@ const CurrentChart = ({ symbol, data, prediction }) => {
           </svg>
         </div>
       </div>
-      {!isMounted && <div className="bg-slate-500 animate-pulse h-80 w-full"></div>}
-      <div id="area-chart"></div>
+       <div className="h-80 w-full flex items-center justify-center">
+         <img src="public/img/about/who-we-are-chart.png" alt="Chart" className="w-full h-full object-contain" />
+       </div>
     </div>
   );
 };

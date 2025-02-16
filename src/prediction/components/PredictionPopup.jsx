@@ -15,7 +15,7 @@ const Modal = ({ onAccept }) => {
               AAPL, AMZN, GOOG, TSLA, and MSFT.
             </li>
             <li>
-              Our predictions cover 5 days and 75 minutes with intervals of 5 minutes.
+              Our predictions cover 1 day and 75 minutes with intervals of 5 minutes.
             </li>
             <li>
               In our interface, you'll find two charts: 

@@ -6,7 +6,8 @@ import PricingCards from './components/PriceCard/PriceCard'
 
 const PricePage = () => {
   return (
-    <section className="relative overflow-hidden" style={{ backgroundImage: "url('public/img/Banner/banner_bg.jpg')" }}>
+    <section className="relative overflow-hidden" 
+    style={{ backgroundImage: "url('public/img/Banner/banner_bg.jpg')" }}>
       <NavBar/>
       <PriceHeader></PriceHeader>
       <PricingCards/>
