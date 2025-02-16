@@ -7,7 +7,7 @@ const NavBar = () => {
     <header className=" z-50">
       <nav className="sticky-banner" style={{ backgroundColor: "#0D0F1C" }}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <h3 className="ml-0 mb-4 text-xl font-extrabold leading-none tracking-tight text-white lg:text-4xl dark:text-white">
+          <h3 className=" mr-3 mb-4 text-xl font-extrabold leading-none tracking-tight text-white lg:text-4xl dark:text-white">
             StockVision
           </h3>
           <div className="flex items-center w-10 h-10 md:order-2 space-x-3 p-2 rtl:space-x-reverse mr-8">
@@ -28,7 +28,7 @@ const NavBar = () => {
                 { path: "/trade", label: "Trade" },
                 { path: "/orders", label: "Orders" },
                 { path: "/pricing", label: "Pricing" },
-                { path: "/markets", label: "Markets" },
+                { path: "/markets", label: "Markets News" },
                 { path: "/about-us", label: "About Us" },
                 { path: "/predictions", label: "Predictions" },
                 { path: "/autotrade", label: "Auto Trade" },

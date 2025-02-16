@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 import Banner from './components/Banner'
 import WhoWeAre from './components/WhoWeAre'
 import WhyChooseUs from './components/WhyChooseUs/WhyChooseUs'
-import Team from './components/Team/Team'
 import CommentSection from './components/CommentSection'
 import WhyChooseUs2 from './components/WhyChooseUs/WhyChooseUs2'
 import ContentComponent from './components/Content'
@@ -41,7 +40,6 @@ const HomePage = () => {
         <ContentComponent></ContentComponent>
         <HowItWorks></HowItWorks>
         <Faq></Faq>
-         <Team/>
 
          <CommentSection/>
          <Footer/>         
