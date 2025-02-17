@@ -10,6 +10,7 @@ import MarketPage from './Market/Index';
 import Prediction from './prediction';
 import OrderPage from './Orders';
 import Aboutus from './About-us';
+import AutoTrade from './AutoTrade';
 
 import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
 
@@ -72,6 +73,17 @@ function App() {
          }
         
         />
+         
+         <Route
+         path='/autotrade'
+         element={
+           <ProtectedRoute>
+            <AutoTrade />
+           </ProtectedRoute>
+         }
+        
+        />
+
         <Route
         path='/about-us'
         element={
