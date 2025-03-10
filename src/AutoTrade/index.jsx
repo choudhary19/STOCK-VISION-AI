@@ -10,7 +10,7 @@ function AutoTrade() {
     <NavBar></NavBar>
     <section className = "relative overflow-hidden" style={{ backgroundImage: "url('public/img/Banner/banner_bg.jpg')" ,backgroundRepeat:"no-repeat" , backgroundSize:"cover"}}>
      <HeroSection
-       title="Welcome to our Trading Bot"
+       title="Welcome to our StockVision Ai Automated Platform"
         subtitle="Automate your trading strategies with ease"
      />
      {/* <AutoTrade></AutoTrade> */}

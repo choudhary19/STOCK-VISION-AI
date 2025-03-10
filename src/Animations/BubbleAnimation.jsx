@@ -40,7 +40,7 @@ const BubbleAnimation = () => {
           key={index}
           src={`public/img/Banner/banner_shape0${index + 1}.png`}
           alt={`Banner Shape 0${index + 1}`}
-          className="w-200px h-200px rounded-lg shadow-lg absolute z-0"
+          className="w-200px h-200px rounded-lg shadow-lg absolute z-10"
           style={{
             x: pos?.x || 0,
             y: pos?.y || 0,

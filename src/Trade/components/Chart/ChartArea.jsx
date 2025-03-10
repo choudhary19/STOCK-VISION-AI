@@ -125,11 +125,11 @@ const StockChart = () => {
               TradingView
             </button>
           </li>
-          <li>
+          {/* <li>
             <button className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">
               Depth
             </button>
-          </li>
+          </li> */}
         </div>
       </ul>
 
@@ -165,12 +165,9 @@ const StockChart = () => {
           )}
         </div>
       ) :(
-        <h1 className='text-2xl font-semibold mb-4 text-center justify-center'>TradingView</h1>
+        <TradingViewChartArea />
       )
-      // : 
-      // (
-      //   <TradingViewChartArea /> // Display TradingView component
-      // )
+      
       }
     </>
   );
