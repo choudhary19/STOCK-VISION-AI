@@ -33,6 +33,7 @@ const SignUpPage = () => {
         <SignUp
           signInUrl='/signin'
            forceRedirectUrl={"/"}
+
          />
       </div>
 
