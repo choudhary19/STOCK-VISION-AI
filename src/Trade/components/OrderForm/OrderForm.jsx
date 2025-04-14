@@ -1,118 +1,191 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const OrderForm = ({ buttonType }) => {
+const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [orderType, setOrderType] = useState("market");
+  const [timeInForce, setTimeInForce] = useState("day");
+  const [purchaseType, setPurchaseType] = useState("shares");
+  const [marketPrice, setMarketPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
+  // ✅ Fetch current market price for the symbol
+  useEffect(() => {
+    const fetchMarketPrice = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/api/get-alpaca-price", {
+          symbol,
+          apikey: apiKey,
+          secretKey,
+        });
+        if (response.data?.price) {
+          setMarketPrice(response.data.price);
+        }
+      } catch (err) {
+        console.error("Failed to fetch market price:", err);
+      }
+    };
+
+    if (symbol && apiKey && secretKey) {
+      fetchMarketPrice();
+    }
+  }, [symbol, apiKey, secretKey]);
+
+  const calculateEstimatedCost = () => {
+    return (quantity * marketPrice).toFixed(2);
+  };
+
+  // ✅ Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+
+      const response = await axios.post(
+        "http://localhost:5000/api/place-order",
+        JSON.stringify({
+          apikey: apiKey,
+          secretKey: secretKey,
+          symbol,
+          qty: quantity,
+          side: buttonType,
+          type: orderType,
+          time_in_force: timeInForce
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      if (response.data?.order) {
+        setSuccess([
+          "Order placed successfully!",
+          'Order ID: ' + response.data.order.id,
+          'Order Side: ' + response.data.order.side,
+          'Order Symbol: ' + response.data.order.symbol,
+          'Order Quantity: ' + response.data.order.qty
+        ].join('\n'));
+        setQuantity(1); // Reset quantity after success
+      } else {
+        throw new Error(response.data?.message || "Failed tooo place order");
+      }
+    } catch (err) {
+      console.error("Order Error:", err);
+      setError(err.response?.data?.message || err.message || "Failed to place order");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <form className="w-full px-10 py-10 mx-auto" >
-      <div className="mb-5">
-        <label htmlFor="price" className="block mb-2 text-sm font-bold text-white">
-          Price
-        </label>
-        <input
-          type="text"
-          id="price"
-          name="price"
+    <div className="bg-gray-800 p-6 rounded-lg">
+      <h3 className="text-xl font-semibold text-blue-300 mb-4 text-center">{buttonType}</h3>
 
-          value={""}
-          onChange={""}
-          className="block w-full p-2.5 text-black font-bold border rounded-lg"
-          placeholder="Price"
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        {/* Symbol */}
+        <div className="mb-4">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Symbol</label>
+          <div className="bg-gray-700 text-white p-2 rounded border border-gray-600">{symbol}</div>
+        </div>
 
-      <div className="mb-5">
-        <label htmlFor="amount" className="block mb-2 text-sm font-bold text-white">
-          Amount
-        </label>
-        <input
-          type="text"
-          id="amount"
-          name="amount"
-          value={""}
-          onChange={""}
-          className="block w-full p-2.5  font-bold text-black border rounded-lg"
-          placeholder="USDT"
-        />
-        <p className="mt-2 text-sm text-white">Available: $9182.12</p>
-      </div>
+        {/* Market Price */}
+        <div className="mb-4">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Market Price</label>
+          <div className="bg-gray-700 text-white p-2 rounded border border-gray-600">
+            ${marketPrice.toFixed(2)}
+          </div>
+        </div>
 
-      <div className="relative mb-10">
-        <label htmlFor="labels-range-input" className="sr-only">
-          USDT
-        </label>
-        <input
-          id="labels-range-input"
-          type="range"
-          value={""}
-          onChange={""}
-          min="100"
-          max="1500"
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-        />
-        <span className="text-sm text-white absolute start-0 -bottom-6">
-          Min ($100)
-        </span>
-        <span className="text-sm text-white absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
-          $500
-        </span>
-        <span className="text-sm text-white absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
-          $1000
-        </span>
-        <span className="text-sm text-white absolute end-0 -bottom-6">
-          Max ($1500)
-        </span>
-      </div>
+        {/* Quantity */}
+        <div className="mb-4">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Quantity</label>
+          <input
+            type="number"
+            min="1"
+            className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+          />
+        </div>
 
-      <div>
-        <label
-          htmlFor="symbol"
-          className="block mb-2 text-sm font-medium text-white"
+        {/* Order Type */}
+        <div className="mb-4">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Order Type</label>
+          <select
+            className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+            value={orderType}
+            onChange={(e) => setOrderType(e.target.value)}
+          >
+            <option value="market">Market</option>
+            <option value="limit">Limit</option>
+            <option value="stop">Stop</option>
+            <option value="stop_limit">Stop Limit</option>
+          </select>
+        </div>
+
+        {/* Time in Force */}
+        <div className="mb-4">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Time in Force</label>
+          <select
+            className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+            value={timeInForce}
+            onChange={(e) => setTimeInForce(e.target.value)}
+          >
+            <option value="day">DAY</option>
+            <option value="gtc">GTC</option>
+            <option value="opg">OPG</option>
+            <option value="cls">CLS</option>
+            <option value="ioc">IOC</option>
+            <option value="fok">FOK</option>
+          </select>
+        </div>
+
+        {/* Estimated Cost */}
+        <div className="mb-6">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Estimated Cost</label>
+          <div className="bg-gray-700 text-white p-2 rounded border border-gray-600">
+            ${calculateEstimatedCost()}
+          </div>
+        </div>
+
+        {/* Buying Power */}
+        <div className="mb-6">
+          <label className="block text-gray-400 text-sm font-medium mb-1">Buying Power</label>
+          <div className="bg-gray-700 text-white p-2 rounded border border-gray-600">
+            ${accountData?.buying_power ? parseFloat(accountData.buying_power).toFixed(2) : "0.00"}
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className={`w-full ${
+            buttonType === "buy"
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-red-600 hover:bg-red-700"
+          } text-white font-bold py-2 px-4 rounded disabled:opacity-50`}
+          disabled={loading}
         >
-          { "Waiting for prediction..."}
-        </label>
-        <input
-          type="text"
-          id="symbol"
-          className="bg-white border border-gray-300 text-gray-900 dark:text-gray-100 placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600"
-          placeholder="AAPL"
-        />
-      </div>
+          {loading ? "Placing Order..." : `Review ${buttonType} Order`}
+        </button>
 
-
-      <button
-        type="submit"
-        className={`w-full mt-5 px-4 py-2.5 rounded-lg text-white ${
-          buttonType === "Buy" ? "bg-green-500" : "bg-red-500"
-        }`}
-      >
-        {buttonType}
-      </button>
-    </form>
+        {/* Error & Success Messages */}
+        {error && (
+          <div className="mt-4 p-3 bg-red-900 text-red-100 rounded text-sm">{error}</div>
+        )}
+        {success && (
+          <div className="mt-4 p-3 bg-green-900 text-green-100 rounded text-sm">{success}</div>
+        )}
+      </form>
+    </div>
   );
 };
 
 export default OrderForm;
-
-
-// 1. Price
-// What is it?
-// The Price is the cost of one unit of the stock (e.g., AAPL) that you're willing to buy or sell at.
-// It reflects the per-share price of the stock.
-// Why is it important?
-// You use this to control at what price you want the bot to execute a trade.
-// For example:
-// If the current market price of AAPL is $115, but you're only willing to buy it if it drops to $112, you set the price to $112.
-// Similarly, if you own AAPL stock and want to sell it when the price goes up to $150, you set the price to $150.
-
-
-// 2. Amount
-// What is it?
-// The Amount is the total money (in USDT) that you want to spend on buying or selling stocks.
-// It defines how much of your balance you’re willing to allocate for this transaction.
-// Why is it important?
-// The bot calculates how many shares you can buy or sell based on this amount and the price you set.
-// How it works:
-// Example 1: If you set Amount = $500 and Price = $112, the bot calculates:
-// Number of Shares to Buy = $500 ÷ $112 = ~4.46 shares
-// Example 2: If you're selling:
-// The bot will sell shares worth $500 at the price you set (e.g., $150 per share).

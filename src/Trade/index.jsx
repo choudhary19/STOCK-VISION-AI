@@ -7,6 +7,9 @@ import MarketActivities from './components/MarketActivities'
 import Footer from '../components/Footer'
 import OrderViewArea from './components/OrderView/OrderViewArea'
 import StockNews from './components/StockTradeNews'
+// import Alpaca from './Alpaca'
+import Alpaca2 from './Alpaca2'
+
 
 function TradePage() {
   return (
@@ -26,14 +29,16 @@ function TradePage() {
               <TradeChart></TradeChart>
             </div>
             {/* Bottom Subsection */}
-            <div className="h-2/5 flex">
+            {/* <div className="h-2/5 flex">
               <div className="w-1/2 flex justify-center items-center">
                 <OrderForm buttonType="Buy" />
               </div>
               <div className="w-1/2 flex justify-center items-center">
                 <OrderForm buttonType="Sell" />
               </div>
-            </div>
+            </div> */}
+            <Alpaca2 />
+
           </div>
           {/* Right Section */}
           <div className="flex flex-col w-1/5">
