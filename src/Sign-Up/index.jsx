@@ -31,8 +31,9 @@ const SignUpPage = () => {
       
       <div className='flex items-center justify-center w-[300px] p-50 mt-10 mb-20' >
         <SignUp
-          signInUrl='/signin'
+          // signInUrl='/signin'
            forceRedirectUrl={"/"}
+
          />
       </div>
 

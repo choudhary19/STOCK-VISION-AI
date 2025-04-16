@@ -11,6 +11,8 @@ import Prediction from './prediction';
 import OrderPage from './Orders';
 import Aboutus from './About-us';
 import AutoTrade from './AutoTrade';
+import AdminPanal from './Admin';
+import AdminRoute from './components/AdminRoute';
 
 import { RedirectToSignIn, SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
 
@@ -36,6 +38,11 @@ function App() {
 
         
         {/* Protected Routes */}
+
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminPanal />} />
+        </Route>
+      
         <Route
           path="/trade"
           element={

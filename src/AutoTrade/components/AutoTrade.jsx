@@ -6,7 +6,7 @@ const PerformAutoTrade = () => {
     <section className="bg-gray-800 border-spacing-6 rounded-full mb-2 p-8 w-full">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold  text-center mb-4 text-white">
-          Automated Trading with Our Bot
+          Automated Trading with StockVision
         </h2>
         <p className="text-lg mb-6 text-gray-300">
           Our trading bot provides automated trading services to manage your
