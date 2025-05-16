@@ -1,32 +1,76 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  Legend,
+} from "recharts";
 
-const CurrentChart = ({ symbol, data, prediction }) => {
+const CurrentChart = ({ symbol }) => {
+  const [liveData, setLiveData] = useState(null);
+  const [historicalData, setHistoricalData] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/api/get-stockData", {
+          symbol,
+        });
+
+        const { live, historical } = response.data || {};
+        setLiveData(live || null);
+        setHistoricalData(historical || []);
+      } catch (err) {
+        console.error("Error fetching stock data:", err);
+        setError("Failed to load stock data.");
+      }
+    };
+
+    const interval = setInterval(fetchStockData, 1000);
+    return () => clearInterval(interval);
+  }, [symbol]);
 
   return (
-    <div className="w-full h-80 rounded-lg shadow p-4">
-      <div className="flex justify-between">
-        <div>
-          <h5 className="leading-none text-3xl font-bold text-white dark:text-white pb-2">
-            Current Price: Eg 250
-          </h5>
-          <p className="text-base font-normal text-gray-500 dark:text-gray-400">Apple Inc.</p>
+    <div className="bg-white rounded-lg p-4 shadow-md">
+      <h2 className="text-xl font-semibold mb-4 text-center">{symbol} Stock Prices</h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+
+      {/* Live Data Section */}
+      {liveData && (
+        <div className="mb-6 text-center">
+          <h3 className="text-lg font-medium">Live Data</h3>
+          <p>Price: ${liveData.price}</p>
+          <p>Open: ${liveData.open}</p>
+          <p>High: ${liveData.high}</p>
+          <p>Low: ${liveData.low}</p>
+          <p>Volume: {liveData.volume.toLocaleString()}</p>
         </div>
-        <div className="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-          1.267%
-          <svg
-            className="w-3 h-3 ms-1"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 14"
-          >
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-          </svg>
-        </div>
-      </div>
-       <div className="h-80 w-full flex items-center justify-center">
-         <img src="public/img/about/who-we-are-chart.png" alt="Chart" className="w-full h-full object-contain" />
-       </div>
+      )}
+
+      {/* Historical Data Chart */}
+      {historicalData.length > 0 ? (
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={historicalData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" tickFormatter={historicalData.date} />
+            <YAxis domain={["auto", "auto"]} />
+            <Tooltip labelFormatter={historicalData.date} />
+            <Legend />
+            <Line type="monotone" dataKey="open" stroke="#8884d8" name=" $Open Price" />
+            <Line type="monotone" dataKey="close" stroke="#82ca9d" name="$Close Price" />
+            <Line type="monotone" dataKey="high" stroke="#FF5733" name="$High Price" />
+            <Line type="monotone" dataKey="low" stroke="#C70039" name="$Low Price" />
+          </LineChart>
+        </ResponsiveContainer>
+      ) : (
+        <p className="text-gray-500 text-center">Loading chart...</p>
+      )}
     </div>
   );
 };

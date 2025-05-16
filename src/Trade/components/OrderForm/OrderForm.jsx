@@ -5,14 +5,13 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
   const [quantity, setQuantity] = useState(1);
   const [orderType, setOrderType] = useState("market");
   const [timeInForce, setTimeInForce] = useState("day");
-  const [purchaseType, setPurchaseType] = useState("shares");
   const [marketPrice, setMarketPrice] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  // ✅ Fetch current market price for the symbol
   useEffect(() => {
+
     const fetchMarketPrice = async () => {
       try {
         const response = await axios.post("http://localhost:5000/api/get-alpaca-price", {
@@ -37,7 +36,6 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
     return (quantity * marketPrice).toFixed(2);
   };
 
-  // ✅ Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -78,7 +76,7 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
       }
     } catch (err) {
       console.error("Order Error:", err);
-      setError(err.response?.data?.message || err.message || "Failed to place order");
+      setError("Failed to place order Field Cannot be Empty");
     } finally {
       setLoading(false);
     }
@@ -141,9 +139,9 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
             <option value="day">DAY</option>
             <option value="gtc">GTC</option>
             <option value="opg">OPG</option>
-            <option value="cls">CLS</option>
+            {/* <option value="cls">CLS</option>
             <option value="ioc">IOC</option>
-            <option value="fok">FOK</option>
+            <option value="fok">FOK</option> */}
           </select>
         </div>
 

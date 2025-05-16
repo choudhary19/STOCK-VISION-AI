@@ -45,7 +45,9 @@ const StockPriceHeader = () => {
   };
 
   useEffect(() => {
-    fetchStockData();
+  
+    const interval = setInterval(fetchStockData, 8000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) return <div>Loading...</div>;

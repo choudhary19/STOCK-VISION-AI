@@ -13,7 +13,7 @@ const SignInPage = () => {
       style={{ backgroundImage: "url(public/img/Banner/banner_bg.jpg)" }}
     >
       <SignIn
-        signUpUrl="/signup"
+        // signUpUrl="/signup"
         forceRedirectUrl={redirectUrl}  // Redirect based on email condition
         // forceRedirectUrl={'ai.stockvision@gmail.com' === 'ai.stockvision@gmail.com' ? '/admin' : '/'}
       />

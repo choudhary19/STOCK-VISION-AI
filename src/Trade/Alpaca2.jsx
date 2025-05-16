@@ -33,8 +33,8 @@ function Alpaca2() {
       const response = await axios.post(
         "http://localhost:5000/api/get-alpaca-account",
         {
-          apikey: apiKey,
-          secretKey: secretKey,
+            apikey: apiKey,
+            secretKey: secretKey,
         },  
         {
           headers: {
