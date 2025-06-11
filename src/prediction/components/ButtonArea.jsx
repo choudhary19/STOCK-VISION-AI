@@ -34,7 +34,7 @@ const ButtonArea = () => {
           <CurrentChart symbol={selectedStock}  />
         </div>
         <div className="w-1/2">
-          <PredictedChart symbol={selectedStock} data={[]} prediction={[]} />
+          <PredictedChart symbol={selectedStock}  />
         </div>
       </section>
       {showModal && <Modal onAccept={() => setShowModal(false)} />}

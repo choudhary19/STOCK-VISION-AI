@@ -46,14 +46,14 @@ const OrdersData = () => {
             <th scope="col" className="px-6 py-3">Current Price</th>
             <th scope="col" className="px-6 py-3">Market Value</th>
             <th scope="col" className="px-6 py-3">Total P/L ($)</th>
-            <th scope="col" className="px-6 py-3">Action</th>
+            {/* <th scope="col" className="px-6 py-3">Action</th> */}
           </tr>
         </thead>
         <tbody>
           {apiKey ? (
             orders.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-4 text-center">You have no open orders</td>
+                <td colSpan={6} className="px-6 py-4 text-center">You have no Assests Right now</td>
               </tr>
             ) : (
               orders.map((order, index) => (
@@ -66,9 +66,9 @@ const OrdersData = () => {
                   <td className="px-6 py-4"><span className={order.unrealized_pl < 0 ? "text-red-600 font-bold" : "text-green-600 font-bold"}>{order.unrealized_pl} $</span></td>
 
                   {/* <td className="px-6 py-4"><span className={order.unrealized_pl < 0 ? "text-red-600 font-bold" : "text-green-600 font-bold"}>$</span>{order.unrealized_pl}</td> */}
-                  <td className="px-6 py-4">
+                  {/* <td className="px-6 py-4">
                     <button className="text-red-600 hover:text-red-900">Delete</button>
-                  </td>
+                  </td> */}
                 </tr>
               ))
             )

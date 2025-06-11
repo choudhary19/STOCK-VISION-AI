@@ -4,7 +4,7 @@ import ProCard from './ProCard';
 import Pluscard from './PLusCard';
 import Fade from 'react-reveal/Fade';
 
-const PricingCards = () => {
+const   PricingCards = () => {
   return (
     <div className="flex  justify-center mb-20 -mt-14 ">
       {/* Left card */}

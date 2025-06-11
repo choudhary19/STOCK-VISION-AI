@@ -18,7 +18,7 @@ const StockChart = () => {
   ];
 
   const fetchStockData = async (symbol) => {
-    const apiKey = 'dac77d2368711c97207bd1a9780bd02b';
+    const apiKey = '0054c9970f6320bbc3fafa0d13be651e';
     const endpoint = 'http://api.marketstack.com/v2/eod';
     const endDate = new Date().toISOString().split('T')[0];
     const startDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0];

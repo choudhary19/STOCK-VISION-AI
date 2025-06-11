@@ -56,7 +56,7 @@ function Dashboard() {
         <SidebarItem icon={<Home size={20} />} label="Dashboard" active={activeMenu === "Dashboard"} onClick={() => handleMenuClick("Dashboard")} />
         <SidebarItem icon={<BarChart3 size={20} />} label="Stocks & Assets" active={activeMenu === "Stocks & Assets"} onClick={() => handleMenuClick("Stocks & Assets")} />
         <SidebarItem icon={<User size={20} />} label="User Management" active={activeMenu === "User Management"} onClick={() => handleMenuClick("User Management")} />
-        <SidebarItem icon={<Settings size={20} />} label="Settings" active={activeMenu === "Settings"} onClick={() => handleMenuClick("Settings")} />
+        {/* <SidebarItem icon={<Settings size={20} />} label="Settings" active={activeMenu === "Settings"} onClick={() => handleMenuClick("Settings")} /> */}
       </aside>
 
       <div className="flex-1 overflow-auto">

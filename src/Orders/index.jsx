@@ -10,9 +10,9 @@ const OrderPage = () => {
     <section className="relative min-h-screen  " style={{ backgroundImage: "url('public/img/Banner/banner_bg.jpg')" }}>
       <NavBar></NavBar>
        
-       <div className='justify-center w-full ml-52'>
+       {/* <div className='justify-center w-full ml-52'>
        <StockPriceHeader></StockPriceHeader>
-       </div>
+       </div> */}
        <div className='pl-10 pr-10 mb-24'>
        <OrderViewArea></OrderViewArea>
 

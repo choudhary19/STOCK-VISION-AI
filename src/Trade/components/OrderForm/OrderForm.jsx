@@ -6,6 +6,8 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
   const [orderType, setOrderType] = useState("market");
   const [timeInForce, setTimeInForce] = useState("day");
   const [marketPrice, setMarketPrice] = useState(0);
+  const [limitPrice, setLimitPrice] = useState(0);
+  const [stopPrice, setStopPrice] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -44,21 +46,32 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
 
     try {
 
+
+      const orderData={
+        apikey: apiKey,
+        secretKey,
+        symbol,
+        qty: quantity,
+        side: buttonType,
+        type: orderType,
+        time_in_force: timeInForce,
+      };
+      
+      
+      if (orderType === "limit" || orderType === "stop_limit") {
+        orderData.limit_price = parseFloat(limitPrice);
+      }
+      if (orderType === "stop" || orderType === "stop_limit") {
+        orderData.stop_price = parseFloat(stopPrice);
+      }
+
       const response = await axios.post(
         "http://localhost:5000/api/place-order",
-        JSON.stringify({
-          apikey: apiKey,
-          secretKey: secretKey,
-          symbol,
-          qty: quantity,
-          side: buttonType,
-          type: orderType,
-          time_in_force: timeInForce
-        }),
+        JSON.stringify(orderData),
         {
           headers: {
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -126,9 +139,58 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
             <option value="stop">Stop</option>
             <option value="stop_limit">Stop Limit</option>
           </select>
+        {orderType === "limit" && (
+          <div className="mt-2">
+           
+            <label className="block text-gray-400 text-sm font-medium mb-1">Limit Price</label>
+            <input
+                type="number"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+                placeholder="Enter limit price $"
+                value={limitPrice}
+                onChange={(e) => setLimitPrice(e.target.value)}
+              />
+         
+          </div>  
+        )}
+        {orderType === "stop" && (
+          <div className="mt-2">
+            <label className="block text-gray-400 text-sm font-medium mb-1">Stop Price</label>
+            <input
+                type="number"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+                placeholder="Enter limit price $"
+                value={stopPrice}
+                onChange={(e) => setStopPrice(e.target.value)}
+              />
+            
+          </div>
+        )}
+        {
+          orderType === "stop_limit" && (
+            <div className="mt-2">
+              <label className="block text-gray-400 text-sm font-medium mb-1">Stop Price</label>
+                 <input
+                type="number"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+                placeholder="Enter limit price $"
+                value={stopPrice}
+                onChange={(e) => setStopPrice(e.target.value)}
+              />
+               <label className="block text-gray-400 text-sm font-medium mb-1">Limit Price</label>
+               <input
+                type="number"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded px-3 py-2"
+                placeholder="Enter limit price $"
+                value={limitPrice}
+                onChange={(e) => setLimitPrice(e.target.value)}
+              />
+            </div>
+          )
+        }
         </div>
 
-        {/* Time in Force */}
+        {/* Tivalme in Force */}
         <div className="mb-4">
           <label className="block text-gray-400 text-sm font-medium mb-1">Time in Force</label>
           <select
@@ -139,9 +201,7 @@ const OrderForm = ({ buttonType, symbol, apiKey, secretKey, accountData }) => {
             <option value="day">DAY</option>
             <option value="gtc">GTC</option>
             <option value="opg">OPG</option>
-            {/* <option value="cls">CLS</option>
-            <option value="ioc">IOC</option>
-            <option value="fok">FOK</option> */}
+         
           </select>
         </div>
 

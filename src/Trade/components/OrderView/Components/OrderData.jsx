@@ -9,6 +9,7 @@ const OrdersData = ({ orders }) => {
             <th scope="col" className="px-6 py-3">Asset</th>
             <th scope="col" className="px-6 py-3">OrderType</th>
             <th scope="col" className="px-6 py-3">Side</th>
+            <th scope="col" className="px-6 py-3">Time in force</th>
             <th scope="col" className="px-6 py-3">Qty</th>
             <th scope="col" className="px-6 py-3">Filled Qty</th>
             <th scope="col" className="px-6 py-3">Avg Fill Price</th>
@@ -37,6 +38,7 @@ const OrdersData = ({ orders }) => {
                 <td className="px-6 py-4">{order.symbol}</td>
                 <td className="px-6 py-4">{order.order_type}</td>
                 <td className="px-6 py-4">{order.side}</td>
+                <td className="px-6 py-4">{order.time_in_force}</td>
                 <td className="px-6 py-4">{order.qty}</td>
                 <td className="px-6 py-4">{order.filled_qty}</td>
                 <td className="px-6 py-4">{order.filled_avg_price}</td>

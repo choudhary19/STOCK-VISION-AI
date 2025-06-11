@@ -1,100 +1,125 @@
 import React, { useState, useEffect } from "react";
-import { Users } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 function Admin_home() {
   // Metric Card Component
   function MetricCard({ title, value, change }) {
     return (
-      <div className="bg-[#111] rounded-lg p-6">
+      <div className="bg-[#111] rounded-lg p-6 flex flex-col items-center">
         <h3 className="text-sm font-medium text-gray-400 mb-2">{title}</h3>
         <p className="text-3xl font-bold mb-1">{value}</p>
-        <p className="text-xs text-gray-400">{change}</p>
+        {change && <p className="text-xs text-green-400">{change}</p>}
       </div>
     );
   }
 
-  // Sample data for admin notifications/messages
-  const [messages, setMessages] = useState([
-    { id: 1, title: "User Report", content: "User John Doe reported an issue with the dashboard.", date: "2023-05-01" },
-    { id: 2, title: "Feature Request", content: "User Jane Smith requested a new feature for analytics.", date: "2023-05-02" },
-    { id: 3, title: "Bug Report", content: "User Mike Johnson reported a bug in the login system.", date: "2023-05-03" },
-    { id: 4, title: "Feedback", content: "User Emily Davis provided feedback on the new design.", date: "2023-05-04" },
-  ]);
-
-  const [selectedMessage, setSelectedMessage] = useState(null);
-
-  // Function to handle message selection
-  const handleSelectMessage = (message) => {
-    setSelectedMessage(message);
-  };
-
-  // Users API state and fetch logic
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);  // Add loading state
+  const [loading, setLoading] = useState(true);
+
+  const [systemStatus, setSystemStatus] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/get-users');
-        const data = await response.json(); // Parse the JSON response
-
-        console.log("API Response:", data); // Check the response structure
-
-        setUsers(data.data || []);  // Ensure 'data' field exists in the response
+        const data = await response.json();
+        setUsers(data.data || []);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        setUsers([]);
       } finally {
-        setLoading(false);  // Set loading to false once done
+        setLoading(false);
+      }
+    };
+
+    const fetchStatus = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/status');
+        const data = await response.json();
+        setSystemStatus(data);
+      } catch (error) {
+        console.error("Failed to fetch status", error);
       }
     };
 
     fetchUsers();
+    fetchStatus();
   }, []);
 
-  const userCount = users.length;  // Count the number of users
+  const userCount = users.length;
+
+  const today = new Date();
+  const currentMonth = today.toLocaleString('default', { month: 'long' });
+  const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1).toLocaleString('default', { month: 'long' });
+
+  const userGrowthData = [
+    { month: prevMonth, users: Math.max(0, userCount+1) },
+    { month: currentMonth, users: userCount }
+  ];
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Dashboard Overview</h2>
+      <h2 className="text-2xl font-bold mb-6">Admin Dashboard</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <MetricCard title="Total Users" value={userCount} change="+5% from last week" />
-        <MetricCard title="Active Users" value={userCount} change="+3% from last week" />
-        <MetricCard title="Revenue" value="$0" change="+7% from last week" />
+        <MetricCard title="Total Users" value={loading ? "Loading..." : userCount} />
+
+        <div className="bg-[#111] rounded-lg p-6 flex flex-col items-center">
+          <h3 className="text-sm font-medium text-gray-400 mb-2">User Growth</h3>
+          <ResponsiveContainer width="100%" height={120}>
+            <BarChart data={userGrowthData}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="month" stroke="#8884d8" />
+              <YAxis hide />
+              <Tooltip />
+              <Bar dataKey="users" fill="#8884d8" radius={[8, 8, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+<div className="bg-[#111] rounded-xl p-6 shadow-md w-full">
+  <h3 className="text-sm font-medium text-gray-400 mb-4 border-b border-gray-700 pb-2">
+    <span className="inline-flex items-center text-green-400 font-bold text-lg">
+      <svg className="w-4 h-4 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-4l5-5-1.5-1.5L9 11l-1.5-1.5L6 11l3 3z" />
+      </svg>
+      All Systems Operational
+    </span>
+  </h3>
+
+  {systemStatus ? (
+    <>
+      <div className="mb-4">
+        <p className="text-xs text-gray-400">
+          Uptime: <span className="text-white font-semibold">{systemStatus.uptime_seconds}</span> seconds
+        </p>
+        <p className="text-xs text-gray-500">
+          Last checked: {new Date().toLocaleTimeString()}
+        </p>
       </div>
 
-      {/* Admin Inbox Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Sidebar with list of messages */}
-        <div className="bg-[#111] rounded-lg p-6 col-span-1">
-          <h3 className="text-sm font-medium text-gray-400 mb-4">Messages</h3>
-          <ul className="space-y-4">
-            {messages.map((message) => (
-              <li
-                key={message.id}
-                className="cursor-pointer p-4 bg-[#222] rounded-lg hover:bg-[#333] transition"
-                onClick={() => handleSelectMessage(message)}
-              >
-                <h4 className="text-lg font-bold text-white">{message.title}</h4>
-                <p className="text-sm text-gray-400">{message.date}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid gap-4 sm:grid-cols-2 w-full">
+        {Object.entries(systemStatus.models).map(([model, info]) => (
+          <div
+            key={model}
+            className="bg-[#1a1a1a] border border-gray-700 rounded-lg p-4 flex flex-col space-y-2 shadow-sm"
+          >
+            <div className="flex justify-between items-center">
+              <h4 className="text-white font-semibold text-md">{model}</h4>
+              <span className="text-xs text-green-400">✓ Healthy</span>
+            </div>
+            <div className="text-xs text-gray-400">
+              <p>Load Time: <span className="text-white">{info.load_time}s</span></p>
+              <p>Uptime: <span className="text-white">{info.uptime}s</span></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    <p className="text-red-400 text-sm">Failed to fetch system status</p>
+  )}
+</div>
 
-        {/* Message details */}
-        <div className="bg-[#111] rounded-lg p-6 col-span-2">
-          {selectedMessage ? (
-            <>
-              <h3 className="text-lg font-bold text-white mb-2">{selectedMessage.title}</h3>
-              <p className="text-sm text-gray-400 mb-4">{selectedMessage.date}</p>
-              <p className="text-white">{selectedMessage.content}</p>
-            </>
-          ) : (
-            <p className="text-gray-400">Select a message to view details.</p>
-          )}
-        </div>
       </div>
     </div>
   );

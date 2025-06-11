@@ -17,6 +17,7 @@ const CurrentChart = ({ symbol }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    
     const fetchStockData = async () => {
       try {
         const response = await axios.post("http://localhost:5000/api/get-stockData", {
@@ -32,7 +33,7 @@ const CurrentChart = ({ symbol }) => {
       }
     };
 
-    const interval = setInterval(fetchStockData, 1000);
+    const interval = setInterval(fetchStockData, 5000);
     return () => clearInterval(interval);
   }, [symbol]);
 
