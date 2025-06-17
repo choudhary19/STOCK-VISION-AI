@@ -19,7 +19,7 @@ function HowItWork() {
             <div className="step-number bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mb-4">2</div>
             <h3 className="text-xl font-semibold text-white mb-4">Auto-Trade Execution</h3>
             <p className="text-lg text-gray-300">
-            Our AI-powered bot continuously analyzes market trends and executes buy/sell orders at the right time.
+            Our AI-powered bot continuously analyzes market trends and executes buy/sell orders and informed you to Procced Trade Conformation.
             </p>
           </div>
           {/* Add more steps as needed */}

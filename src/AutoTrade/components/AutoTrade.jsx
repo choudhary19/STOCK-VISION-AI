@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 const PerformAutoTrade = () => {
   const [isLoggedIn] = useState(localStorage.getItem("alpacaLoggedIn") === "true");
@@ -14,6 +16,7 @@ const PerformAutoTrade = () => {
   const [side, setSide] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [Trend ,setTrend ] = useState("");
+  const [open,setopen]= useState(null);
 
   const fetchMarketPrice = async (selectedSymbol) => {
     try {
@@ -50,7 +53,8 @@ const PerformAutoTrade = () => {
     const data = predictionRes.data;
 
     const predicted = data.predicted_close;
-    const actual = data.actual_close;
+    const actual = data.open;
+    setopen(actual);
 
       setPredictedPrice(predicted);
       setActualPrice(actual);
@@ -74,7 +78,7 @@ const PerformAutoTrade = () => {
       setShowModal(true);
     } catch (err) {
       console.error("Prediction error:", err);
-      setError("Prediction failed.");
+      setError("Prediction And Automations failed.");
     }
   };
 
@@ -176,6 +180,15 @@ const PerformAutoTrade = () => {
           </div>
         )}
 
+        <Link to="/trade" className="text-blue-400 hover:underline mt-4 block text-center">
+          <p className="text-center text-gray-200 mt-4">
+            See Your Trades?{" "}
+            <Link to="/trade" className="text-blue-400 hover:underline">
+              Click here
+            </Link>
+          </p>
+        </Link>
+
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       </div>
 
@@ -189,7 +202,7 @@ const PerformAutoTrade = () => {
             </h3>
             <p className="mb-4 text-lg">
             
-              {symbol} Stocks will move From {marketPrice}$ to {predictedPrice}$ from predicition.
+              {symbol} Stocks will move From {open}$ to {predictedPrice}$ from predicition.
               <br />
               Are you sure you want to{" "}
               <strong>{side}</strong> {quantity} shares of <strong>{symbol}</strong>?

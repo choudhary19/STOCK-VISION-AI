@@ -15,7 +15,7 @@ const OrdersData = ({ orders }) => {
             <th scope="col" className="px-6 py-3">Avg Fill Price</th>
             <th scope="col" className="px-6 py-3">Status</th>
             <th scope="col" className="px-6 py-3">Submitted At</th>
-            <th scope="col" className="px-6 py-3">
+            {/* <th scope="col" className="px-6 py-3">
               <div className="flex items-center text-yellow-400">
                 Cancel All
                 <a href="#">
@@ -24,7 +24,7 @@ const OrdersData = ({ orders }) => {
                   </svg>
                 </a>
               </div>
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody>
@@ -44,9 +44,9 @@ const OrdersData = ({ orders }) => {
                 <td className="px-6 py-4">{order.filled_avg_price}</td>
                 <td className="px-6 py-4">{order.status}</td>
                 <td className="px-6 py-4">{order.submitted_at}</td>
-                <td className="px-6 py-4 text-right">
+                {/* <td className="px-6 py-4 text-right">
                   <button className="bg-red-500 text-white rounded-lg px-4 py-2.5 text-sm w-full">Cancel</button>
-                </td>
+                </td> */}
               </tr>
             ))
           )}
