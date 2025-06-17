@@ -25,27 +25,29 @@ const StockPriceHeader = () => {
   ];
 
   const fetchStockData = async () => {
-    try {
-      const requests = companies.map((company) =>
-        axios.get(
-          `https://finnhub.io/api/v1/quote?symbol=${company.symbol}&token=cu0fm31r01ql96gqgt50cu0fm31r01ql96gqgt5g`
-        )
-      );
-      const responses = await Promise.all(requests);
-      const stockData = responses.map((response, index) => ({
-        ...companies[index],
-        ...response.data,
-      }));
-      setStocks(stockData);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  };
+  try {
+    const requests = companies.map(({ symbol }) =>
+      axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=cu0fm31r01ql96gqgt50cu0fm31r01ql96gqgt5g`)
+    );
+
+    const responses = await Promise.all(requests);
+    const stockData = responses.map((response, index) => ({
+      ...companies[index],
+      ...response.data,
+    }));
+
+    setStocks(stockData);
+  } catch (error) {
+    setError(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
-    fetchStockData();
+  
+    const interval = setInterval(fetchStockData, 8000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) return <div>Loading...</div>;

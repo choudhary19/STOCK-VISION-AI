@@ -5,7 +5,7 @@ import PredictedChart from "./chart/predictedchart";
 import Modal from "./PredictionPopup";
 
 const ButtonArea = () => {
-  const stockSymbols = ["AAPL", "GOOG", "AMZN", "MSFT", "TSLA"];
+  const stockSymbols = ["AAPL", "GOOGL", "AMZN", "MSFT", "TSLA"];
   const [selectedStock, setSelectedStock] = useState("AAPL");
   const [showModal, setShowModal] = useState(true);
 
@@ -31,10 +31,10 @@ const ButtonArea = () => {
       
       <section className="flex flex-row gap-5 justify-center">
         <div className="w-1/2">
-          <CurrentChart symbol={selectedStock} data={[]} prediction={[]} />
+          <CurrentChart symbol={selectedStock}  />
         </div>
         <div className="w-1/2">
-          <PredictedChart symbol={selectedStock} data={[]} prediction={[]} />
+          <PredictedChart symbol={selectedStock}  />
         </div>
       </section>
       {showModal && <Modal onAccept={() => setShowModal(false)} />}

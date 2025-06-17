@@ -10,7 +10,7 @@ const AdminRoute = () => {
     return <div>Loading...</div>;
   }
 
-  if (role !== 'admin') {
+  if (role !== 'admin') { 
     // Redirect non-admin users to home
     return <Navigate to="/" replace />;
   }

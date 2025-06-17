@@ -33,8 +33,8 @@ function Alpaca2() {
       const response = await axios.post(
         "http://localhost:5000/api/get-alpaca-account",
         {
-          apikey: apiKey,
-          secretKey: secretKey,
+            apikey: apiKey,
+            secretKey: secretKey,
         },  
         {
           headers: {
@@ -135,11 +135,7 @@ function Alpaca2() {
               {loading ? "Connecting..." : "Connect to Alpaca"}
             </button>
 
-            {error && (
-              <div className="mt-4 p-3 bg-red-900 text-red-100 rounded">
-                {error}
-              </div>
-            )}
+          
           </form>
 
           <div className="mt-6 text-sm text-gray-400">
@@ -159,7 +155,8 @@ function Alpaca2() {
             </p>
           </div>
         </div>
-      ) : (
+      ) 
+      : (
         <div className="max-w-6xl mx-auto">
           <div className=" justify-between items-center mb-8">
             <div className=" items-center justify-center text-center text-cyan-100">

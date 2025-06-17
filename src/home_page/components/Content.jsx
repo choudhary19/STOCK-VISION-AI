@@ -104,9 +104,9 @@ const ContentComponent = () => {
   ];
 
   return (
+<>
 
     <div className="flex  text-white bg-black flex-col md:flex-row">
-    <BubbleAnimation></BubbleAnimation>
 
       <div className={`md:w-1/2 flex justify-center items-center p-8 `}>
         <div>
@@ -138,7 +138,10 @@ const ContentComponent = () => {
           ))}
         </div>
       </div>
+
     </div>
+</>
+
   );
 };
 

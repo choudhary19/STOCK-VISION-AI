@@ -15,11 +15,11 @@ const Modal = ({ onAccept }) => {
               AAPL, AMZN, GOOG, TSLA, and MSFT.
             </li>
             <li>
-              Our predictions cover 1 day and 75 minutes with intervals of 5 minutes.
+              Our predictions cover Close Price of day.
             </li>
             <li>
               In our interface, you'll find two charts: 
-              the left chart displays the last 10 days or last 150 minutes' price of the selected stock,
+              the left chart displays the last day and live market price of the selected stock,
               while the right chart shows the next predictions respectively.
             </li>
             <li>

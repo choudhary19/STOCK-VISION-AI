@@ -4,7 +4,6 @@ import React from 'react';
 const WhyChooseUs = () => {
   return (
     <div className="relative pt-10 pb-52 text-center justify-center bg-black">
-      <BubbleAnimation></BubbleAnimation>
       <h1 className='text-6xl lg:text-7xl font-bold text-white'>
         Our code of <span className='bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>honor</span>
       </h1>
