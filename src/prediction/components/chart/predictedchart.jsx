@@ -9,7 +9,7 @@ const PredictedChart = ({ symbol }) => {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
   const [trend, setTrend] = useState("");
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(false);  
   const [chartData, setChartData] = useState([]);
 
   const fetchPrediction = async () => {
@@ -25,26 +25,31 @@ const PredictedChart = ({ symbol }) => {
       const data = response.data;
       setPrediction(data);
       // Compute trend
-      const diff = data.predicted_close - data.open;
+      const diff = data.predicted_Future_close - data.open;
       const percentChange = (diff / data.open) * 100;
       if (diff > 0) setTrend(`Buy 📈 (+${percentChange.toFixed(2)}%)`);
       else if (diff < 0) setTrend(`Sell 📉 (${percentChange.toFixed(2)}%)`);
       else setTrend("Hold 🤔 (0.00%)");
 
       // Prepare chart data
-      const last7 = data.last7daysdata.map(item => ({
+      const last7 = data.past7dayspredictions.slice(0, 6).map(item => ({
         
         date: item.date,
-        close: parseFloat(item.close)
+        actual: parseFloat(item.actual_close),
+        predicted: parseFloat(item.predicted_close)
+        
       }));
 
       // Add predicted value
       last7.push({
-        date: "Predicted",
-        close: parseFloat(data.predicted_close)
+      date: "Predicted",
+      // actual: parseFloat(data.actual_close),
+      predicted: parseFloat(data.predicted_Future_close)
       });
 
       setChartData(last7);
+     
+
     } catch (err) {
       setError("❌ Failed to fetch prediction.");
     }
@@ -78,7 +83,7 @@ const PredictedChart = ({ symbol }) => {
               <div className="flex justify-between items-center mb-3">
                 <div>
                   <h5 className="text-2xl font-bold">
-                    Predicted Price: ${prediction?.predicted_close.toFixed(2)}
+                    Predicted Price: ${prediction?.predicted_Future_close.toFixed(2)}
                   </h5>
                   <p className="text-sm text-gray-300">
                     Last Price ({prediction?.last_date}): ${prediction?.actual_close.toFixed(2)}
@@ -92,16 +97,46 @@ const PredictedChart = ({ symbol }) => {
               </div>
 
               <div className="w-full h-96 bg-gray-700 rounded p-4">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                    <XAxis dataKey="date" stroke="#ccc" />
-                    <YAxis domain={['dataMin - 5', 'dataMax + 5']} stroke="#ccc" />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="close" stroke="#00bcd4" name="Close Price" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height={400}>
+  <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+    <XAxis dataKey="date" stroke="#ccc" />
+    <YAxis stroke="#ccc" domain={['auto', 'auto']} />
+   <Tooltip
+  formatter={(value, name) => {
+    const labelMap = {
+      actual: "Actual Price",
+      predicted: "Predicted Price"
+    };
+    return [`$${value.toFixed(2)}`, labelMap[name] || name];
+  }}
+  labelStyle={{ color: '#fff' }}
+  contentStyle={{ backgroundColor: '#222', borderRadius: '8px' }}
+/>
+
+    <Legend />
+    
+    <Line
+      type="monotone"
+      dataKey="actual"
+      name="Actual Price"
+      stroke="#00e676"
+      strokeWidth={2}
+     
+    />
+    <Line
+      type="monotone"
+      dataKey="predicted"
+      name="Predicted Price"
+      stroke="#ff1744"
+      strokeDasharray="5 3"
+      strokeWidth={2}
+   
+    />
+  </LineChart>
+</ResponsiveContainer>
+
+
               </div>
             </>
           )}

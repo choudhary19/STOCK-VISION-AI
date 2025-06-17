@@ -33,9 +33,9 @@ function Alpaca2() {
       const response = await axios.post(
         "http://localhost:5000/api/get-alpaca-account",
         {
-            apikey: apiKey,
-            secretKey: secretKey,
-        },  
+          apikey: apiKey,
+          secretKey: secretKey,
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -56,8 +56,12 @@ function Alpaca2() {
       localStorage.setItem("alpacaSecretKey", secretKey);
       localStorage.setItem("alpacaLoggedIn", "true");
     } catch (err) {
+      if (err.response?.status === 400) {
+        setError("Invalid API key or secret key.");
+      } else {
+        setError(err.response?.data?.message || err.message || "Failed to authenticate with Alpaca");
+      }
       console.error("Authentication error:", err);
-      setError(err.response?.data?.message || err.message || "Failed to authenticate with Alpaca");
       setAuthenticated(false);
       setIsLoggedIn(false);
       setAccountData(null);
@@ -135,7 +139,11 @@ function Alpaca2() {
               {loading ? "Connecting..." : "Connect to Alpaca"}
             </button>
 
-          
+            {error && (
+              <p className="mt-4 text-red-600 text-sm font-medium">
+                {error + "Please check your API keys and try again."}
+              </p>
+            )}
           </form>
 
           <div className="mt-6 text-sm text-gray-400">

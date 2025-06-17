@@ -4,7 +4,7 @@ import SignUpPage from './Sign-Up';
 import SignInPage from './Sign-In';
 import './index.css';
 import HomePage from './home_page';
-import TradePage from './Trade';
+import TradePage from './Trade';  
 import PricePage from './pricing';
 import MarketPage from './Market/Index';
 import Prediction from './prediction';
